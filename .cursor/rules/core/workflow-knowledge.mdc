@@ -1,0 +1,155 @@
+---
+description: When a user asks you to generate a document from valuable knowledge or insights during a session, follow these instructions to create a comprehensive, structured knowledge document.  u
+globs: 
+alwaysApply: false
+---
+# Cursor Rules for Knowledge Extraction
+
+When a user asks you to generate a document from valuable knowledge or insights during a session, follow these instructions to create a comprehensive, structured knowledge document.
+
+## Required Steps Before Content Creation
+1. Create the knowledge directory if it doesn't already exist:
+   ```bash
+   mkdir -p .cursor/knowledge
+   ```
+2. Determine the appropriate filename:
+   - Use kebab-case
+   - Must be descriptive of the concept
+   - Include date in YYYY-MM-DD format
+   - Must end in .md
+   - Example: `use-debounce-hook-2025-03-26.md`
+3. Always create the file in `.cursor/knowledge/` directory
+4. Never output the knowledge content directly in the conversation
+5. All knowledge documents must be written to a file
+
+## Document Structure
+
+Generate a markdown document with the following main sections:
+1. Title (Concept Name)
+2. Question
+3. Summary
+4. Explanation
+5. Code Example
+6. Usage in Application
+7. Practical Use Cases
+8. Related Concepts
+9. Metadata
+
+## Section Instructions
+
+### Title
+- Use the format: `# [Concept Name]`
+- The concept name should be concise and descriptive of the programming knowledge being captured
+
+### Question
+- Include the exact question that prompted this knowledge
+- Format as a blockquote for visual distinction
+- Example: `> what is the @useDebounce.ts hook and function for? What does it do in the application?`
+
+### Summary
+- Write 1-2 sentences that succinctly explain:
+  - What the concept is
+  - Its primary purpose or function
+  - Why it's valuable or important
+- Keep technical jargon to a minimum in this section
+
+### Explanation
+- Provide a comprehensive explanation of how the concept works
+- Include:
+  - Core mechanics of the concept
+  - Internal workings or implementation details
+  - Principles behind the concept
+- Use clear, precise language appropriate for future reference
+- Break into subsections with ### headings if the explanation is complex
+
+### Code Example
+- Include a representative code example that demonstrates the concept
+- Use appropriate syntax highlighting for the language
+- Format as:
+  ```[language]
+  [code example]
+  ```
+- Choose examples that are concise yet illustrative
+- Add brief comments to explain key parts of the code
+
+### Usage in Application
+- Document specifically where and how this concept is used in the codebase
+- Include:
+  - File locations
+  - Component names
+  - Implementation details specific to this application
+- Use bullet points for clarity
+- Be specific rather than general
+
+### Practical Use Cases
+- List 3-5 practical applications of the concept
+- Format as bullet points
+- For each use case:
+  - Describe the scenario
+  - Explain why this concept is appropriate for that scenario
+  - Note any special considerations for that use case
+- Focus on real-world applications, not theoretical ones
+
+### Related Concepts
+- List 2-5 related programming concepts
+- Format as bullet points
+- For each related concept:
+  - Provide the name of the concept
+  - Include a brief (1 sentence) description
+  - Explain how it relates to the main concept
+
+### Metadata
+- Include a metadata section at the end using the following format:
+  ```
+  <metadata>
+  created: [YYYY-MM-DD]
+  tags:
+    - [relevant tag]
+    - [relevant tag]
+  topic: [broader topic area]
+  complexity: [basic/intermediate/advanced]
+  </metadata>
+  ```
+
+## File Creation and Location
+
+### Required File Creation Steps
+1. ALWAYS execute these steps in order:
+   - Create knowledge directory if it doesn't exist: `mkdir -p .cursor/knowledge`
+   - Create the knowledge file: `.cursor/knowledge/[concept-name]-[YYYY-MM-DD].md`
+   - Write the knowledge content to the file
+   - Confirm file creation to the user
+
+2. Filename Requirements:
+   - Use kebab-case format
+   - Must be descriptive of the concept
+   - Must include the date
+   - Must end in .md extension
+   - Examples:
+     - `.cursor/knowledge/use-debounce-hook-2025-03-26.md`
+     - `.cursor/knowledge/react-context-pattern-2025-03-27.md`
+
+3. Directory Structure:
+   - All knowledge documents MUST be in `.cursor/knowledge/`
+   - Nested directories are NOT allowed
+   - One file per knowledge concept
+
+4. File Creation Verification:
+   - After creating the file, verify its existence
+   - Confirm to the user that the file was created
+   - Provide the full path of the created file
+
+### Naming Conventions
+- Use kebab-case for filenames that clearly describe the concept
+- Include the capture date in YYYY-MM-DD format
+- Create a descriptive filename that reflects the concept's purpose
+- When creating a new knowledge document, check for existing documents to maintain consistent naming conventions
+
+<metadata>
+  priority: high
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
