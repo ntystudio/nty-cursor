@@ -1,0 +1,212 @@
+---
+description: When the user types the command build.review to perform build process analysis and error resolution.
+globs: 
+alwaysApply: false
+---
+# `build.review`
+Run the build process, resolve any errors, and generate a comprehensive report on build health and performance. The analysis MUST be written to a file in the `.cursor/output` directory.
+
+## Pre-execution Steps:
+1. Create output directory if it doesn't exist:
+   ```bash
+   mkdir -p .cursor/output
+   ```
+
+2. Generate timestamp for filename:
+   ```bash
+   timestamp=$(date '+%Y-%m-%d-%H-%M')
+   output_file=".cursor/output/build-review-${timestamp}.md"
+   ```
+
+## Command Execution Steps:
+1. Execute build process and capture output:
+   ```bash
+   npm run build 2>&1 | tee build_output.log
+   ```
+
+2. Analyze build errors:
+   ```bash
+   grep -i "error" build_output.log > build_errors.log
+   ```
+
+3. Extract build warnings:
+   ```bash
+   grep -i "warning" build_output.log > build_warnings.log
+   ```
+
+4. Analyze build performance:
+   ```bash
+   grep -i "time" build_output.log | grep -i "ms\|s\|seconds" > build_performance.log
+   ```
+
+5. Identify dependency issues:
+   ```bash
+   npm ls --json > dependency_tree.json
+   ```
+
+6. Check for outdated packages:
+   ```bash
+   npm outdated --json > outdated_packages.json
+   ```
+
+7. Analyze bundle size (if applicable):
+   ```bash
+   npm run build -- --stats 2>/dev/null || echo "Stats generation not available"
+   ```
+
+8. Check test coverage (if applicable):
+   ```bash
+   npm test -- --coverage 2>/dev/null || echo "Coverage reporting not available"
+   ```
+
+## Output Generation Steps:
+1. **CRITICAL**: Create the output directory and file:
+   - Directory: `.cursor/output` MUST exist
+   - Filename format: `build-review-YYYY-MM-DD-HH-MM.md`
+   - Example: `build-review-2025-03-25-22-30.md`
+
+2. Write the analysis using the following template structure:
+   ```markdown
+   # Build Review Report
+
+   **Project:** [Project Name]
+   **Build Command:** `npm run build`
+   **Analysis Date:** [Current Date]
+
+   ### Executive Summary
+   [1-2 paragraphs summarizing key findings, build status, and critical issues]
+
+   ### Build Status
+   - **Result:** [Success/Failure]
+   - **Duration:** [Time in seconds]
+   - **Exit Code:** [Code]
+   - **Build Artifacts Generated:** [Yes/No]
+
+   ### Error Analysis
+   #### Critical Errors
+   | Error Type | File | Line | Description | Resolution |
+   |------------|------|------|-------------|------------|
+   | [Type]     | [Path] | [Line] | [Message] | [Fix details] |
+
+   #### Error Patterns
+   [Analysis of common error themes or recurring issues]
+
+   ### Warning Analysis
+   #### Warning Summary
+   | Severity | Count | Category | Example |
+   |----------|-------|----------|---------|
+   | High     | [Count] | [Type] | [Example] |
+   | Medium   | [Count] | [Type] | [Example] |
+   | Low      | [Count] | [Type] | [Example] |
+
+   #### Impact Assessment
+   [Analysis of how warnings might affect production code]
+
+   ### Build Performance
+   #### Time Metrics
+   | Stage | Duration | vs. Baseline | Concerns |
+   |-------|----------|--------------|----------|
+   | [Stage] | [Time] | [Diff] | [Notes] |
+
+   #### Optimization Opportunities
+   [Specific areas where build performance could be improved]
+
+   ### Dependency Analysis
+   #### Dependency Health
+   - Total Dependencies: [Count]
+   - Direct Dependencies: [Count]
+   - Dev Dependencies: [Count]
+   - Outdated Packages: [Count]
+   
+   #### Vulnerability Assessment
+   [Summary of any security issues in dependencies]
+
+   ### Bundle Analysis
+   #### Size Metrics
+   | Bundle | Size | Gzipped | Change |
+   |--------|------|---------|--------|
+   | [Name] | [Size] | [Gzipped] | [+/-] |
+   
+   #### Large Modules
+   [Identification of unusually large modules that could be optimized]
+
+   ### Automated Fixes
+   #### Applied Resolutions
+   | Issue | File | Original | Fixed Code |
+   |-------|------|----------|------------|
+   | [Issue] | [Path] | [Before] | [After] |
+
+   #### Manual Intervention Required
+   [List of issues requiring developer attention with specific recommendations]
+
+   ### Action Items
+   - [Specific recommendation 1]
+   - [Specific recommendation 2]
+   - [Specific recommendation 3]
+
+   ### Re-build Verification
+   **Result:** [Success/Failure]
+   **Remaining Issues:** [Count and summary]
+   ```
+
+3. **REQUIRED** Sections in Analysis:
+   - Executive Summary
+   - Build Status
+   - Error Analysis
+   - Warning Analysis
+   - Build Performance
+   - Dependency Analysis
+   - Automated Fixes
+   - Action Items
+   - Re-build Verification
+
+4. **VERIFICATION**: Before completing the command:
+   - Confirm output directory exists
+   - Verify file was created with correct timestamp
+   - Ensure all sections are present in the analysis
+
+## Additional Analysis Options:
+1. Code quality metrics:
+   ```bash
+   npx eslint . --format json > eslint_results.json 2>/dev/null || echo "ESLint not configured"
+   ```
+
+2. Type checking issues:
+   ```bash
+   npx tsc --noEmit --project tsconfig.json > type_errors.log 2>&1 || echo "TypeScript errors found"
+   ```
+
+3. Test coverage analysis:
+   ```bash
+   npx jest --coverage --json > test_coverage.json 2>/dev/null || echo "Jest not configured"
+   ```
+
+## Report Generation:
+1. **MANDATORY**: Save the report to `.cursor/output/build-review-[TIMESTAMP].md`
+2. Include visualizations where possible
+3. Format tables for easy reading
+4. Provide actionable insights
+
+## Error Handling:
+1. If `.cursor/output` directory doesn't exist:
+   - Create it using `mkdir -p .cursor/output`
+   - Verify creation before proceeding
+
+2. If file creation fails:
+   - Report error to user
+   - Suggest manual directory creation
+   - Do not proceed without successful file creation
+
+3. If build command fails:
+   - Capture error output
+   - Continue analysis on available data
+   - Document failure reasons
+
+<metadata>
+  priority: critical
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
