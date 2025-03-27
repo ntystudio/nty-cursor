@@ -1,4 +1,4 @@
-**_Below is a sample generated output by Cursor using the `workflow-knowledge.mdc` rule._**
+**_Below is a sample generated output by Cursor using the `core/workflow-knowledge.mdc` rule._**
 
 # useDebounce Hook
 
