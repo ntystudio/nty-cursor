@@ -1,0 +1,188 @@
+---
+description: When a user asks you to generate a specification document for an application flow, follow these instructions to create a comprehensive, structured document.
+globs: 
+alwaysApply: false
+---
+# Cursor Rules for Generating Application Flow Specifications
+
+When a user asks you to generate a specification document for an application flow, follow these instructions to create a comprehensive, structured document.
+
+## Required Steps Before Content Creation
+1. Create the specs directory if it doesn't already exist:
+   ```bash
+   mkdir -p .cursor/specs
+   ```
+2. Determine the appropriate filename:
+   - Use kebab-case
+   - Must be descriptive of the flow
+   - Must end in .md
+   - Example: `user-authentication-flow.md`
+3. Always create the file in `.cursor/specs/` directory
+4. Never output the specification content directly in the conversation
+5. All specifications must be written to a file
+
+## Document Structure
+
+Generate a markdown document with the following main sections:
+1. Title (Flow Name)
+2. Overview
+3. Core Components
+4. User Interaction Flow
+5. Accessibility Features
+6. Error Handling
+7. Performance Considerations
+8. Metadata
+
+## Section Instructions
+
+### Title
+- Use the format: `# [Flow Name] Specification`
+- The flow name should be concise and descriptive of the feature being specified
+
+### Overview
+- Analyze the application flow to identify its primary purpose and value proposition
+- Write 2-3 paragraphs that explain:
+  - What the flow does at a high level
+  - How it benefits users
+  - How it relates to other parts of the application
+- Focus on the "why" of the feature, not just the "what"
+- Keep technical jargon to a minimum
+
+### Core Components
+- Identify the main UI elements and functional components that make up the flow
+- Create a subsection for each major component with a numbered heading (e.g., `### 1. [Component Name]`)
+- For each component:
+  - Start with a brief description of its purpose
+  - List its key features and capabilities using bullet points
+  - Include details about supported content types or formats if applicable
+  - Describe interactive elements and behaviors
+  - Note responsive behaviors or state changes
+  - Mention relationships to other components
+- Use descriptive icons in bullet points where appropriate (e.g., 📍 for markers)
+- Include 3-8 components based on the complexity of the flow
+
+### User Interaction Flow
+- Break down the user journey into logical phases or scenarios
+- Create a subsection for each phase with a clear heading (e.g., `### Initial Load`)
+- For each phase:
+  - Use numbered lists to sequence the steps
+  - Start with the user's action or entry point
+  - Include system responses and UI changes
+  - Detail user inputs and resulting behaviors
+  - Explain successful completion states
+- Include branching paths and alternative flows where relevant
+- Ensure the flow description is comprehensive enough for a developer to implement the behavior
+
+### Accessibility Features
+- Analyze the flow for accessibility requirements
+- List 5-7 specific accessibility considerations as bullet points
+- Include:
+  - Keyboard navigation support
+  - Screen reader compatibility
+  - Color contrast requirements
+  - Text size and readability concerns
+  - Focus management
+  - ARIA attributes or roles needed
+- Be specific about implementation details rather than just listing general principles
+
+### Error Handling
+- Identify potential failure points in the flow
+- List 5-7 specific error scenarios as bullet points
+- For each scenario:
+  - Describe the error condition
+  - Explain appropriate user feedback
+  - Suggest recovery mechanisms
+- Include common errors like network failures, invalid inputs, and API errors
+- Consider edge cases specific to the flow being documented
+
+### Performance Considerations
+- Analyze the flow for potential performance bottlenecks
+- List 5-7 specific optimization strategies as bullet points
+- Include:
+  - Loading strategies (lazy loading, prefetching)
+  - Resource management
+  - Animation and transition optimizations
+  - Data handling efficiency
+  - Memory management
+- Provide concrete recommendations, not just general principles
+
+### Metadata
+- Include a metadata section at the end using the following format:
+    ```
+    <metadata>
+    priority: [high/medium/low]
+    version: [version number]
+    changelog:
+        - version: [version number]
+        changes:
+            - [specific change description]
+            - [specific change description]
+    </metadata>
+    ```
+- Set the priority based on the feature's importance to the application
+- Use semantic versioning for the version number
+- Include actual change descriptions in the changelog, not placeholders
+
+
+### General Guidelines
+- Use clear, precise language throughout the document
+- Maintain consistent formatting and heading levels
+- Use bullet points and numbered lists for clarity
+- Include specific details rather than vague descriptions
+- Focus on functional requirements and user experience
+- Avoid solution-specific implementation details unless necessary
+- Keep the document comprehensive yet concise
+- Use technical terms appropriately for the intended audience
+- Write in a professional, objective tone
+
+When analyzing the application flow, look for:
+- Key user tasks and goals
+- Primary UI components and their relationships
+- Interaction patterns and sequences
+- Potential edge cases and error scenarios
+- Performance implications
+- Accessibility requirements
+
+Remember to tailor the level of detail to the complexity of the flow being documented. Simpler flows may require fewer components and interaction phases, while complex flows may need more detailed breakdowns.
+
+## File Creation and Location
+
+### Required File Creation Steps
+1. ALWAYS execute these steps in order:
+   - Create specs directory if it doesn't exist: `mkdir -p .cursor/specs`
+   - Create the specification file: `.cursor/specs/[flow-name].md`
+   - Write the specification content to the file
+   - Confirm file creation to the user
+
+2. Filename Requirements:
+   - Use kebab-case format
+   - Must be descriptive of the flow
+   - Must end in .md extension
+   - Examples:
+     - `.cursor/specs/user-authentication-flow.md`
+     - `.cursor/specs/payment-processing-flow.md`
+
+3. Directory Structure:
+   - All specifications MUST be in `.cursor/specs/`
+   - Nested directories are NOT allowed
+   - One file per flow specification
+
+4. File Creation Verification:
+   - After creating the file, verify its existence
+   - Confirm to the user that the file was created
+   - Provide the full path of the created file
+
+### Naming Conventions
+- Use kebab-case for filenames that clearly describe the flow (e.g., `user-onboarding-flow.md`, `payment-processing-flow.md`)
+- Create a descriptive filename that reflects the flow's purpose (e.g., `tutorial-player-flow.md`)
+- When creating a new specification, check for existing specs in the folder to maintain consistent naming conventions
+- For related flows, use prefixes to group them logically (e.g., `admin-user-management.md`, `admin-content-moderation.md`)
+
+<metadata>
+  priority: critical
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
