@@ -1,0 +1,195 @@
+---
+description: When the user types the command git.summarize to receive a comprehensive summary of recent git activity.
+globs: 
+alwaysApply: false
+---
+# `git.summarize`
+Provide a comprehensive summary of recent git activity and repository health. The analysis MUST be written to a file in the `.cursor/output` directory.
+
+## Pre-execution Steps:
+1. Create output directory if it doesn't exist:
+   ```bash
+   mkdir -p .cursor/output
+   ```
+
+2. Generate timestamp for filename:
+   ```bash
+   timestamp=$(date '+%Y-%m-%d-%H-%M')
+   output_file=".cursor/output/git-activity-${timestamp}.md"
+   ```
+
+## Command Execution Steps:
+1. Collect recent commit history:
+   ```bash
+   git log --pretty=format:"%h %ad %s (%an)" --date=short --all -n 50 | cat
+   ```
+
+2. Analyze commit frequency by author:
+   ```bash
+   git shortlog -sn --all --no-merges --since="1 month ago"
+   ```
+
+3. Identify most changed files:
+   ```bash
+   git log --pretty=format: --name-only --since="1 month ago" | sort | uniq -c | sort -rg | head -10
+   ```
+
+4. List active branches:
+   ```bash
+   git branch -a --sort=-committerdate | head -10
+   ```
+
+5. Examine recent merges:
+   ```bash
+   git log --merges --since="1 month ago" --pretty=format:"%h %ad %s (%an)" --date=short
+   ```
+
+6. Check for stale branches:
+   ```bash
+   git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short) - %(committerdate:relative) - %(authorname)'
+   ```
+
+7. Analyze commit message patterns:
+   ```bash
+   git log --pretty=format:"%s" --since="1 month ago" | cat
+   ```
+
+8. Identify potential hotspots (files with frequent changes):
+   ```bash
+   git log --pretty=format: --name-only --since="3 months ago" | sort | uniq -c | sort -rg | head -20
+   ```
+
+## Output Generation Steps:
+1. **CRITICAL**: Create the output directory and file:
+   - Directory: `.cursor/output` MUST exist
+   - Filename format: `git-activity-YYYY-MM-DD-HH-MM.md`
+   - Example: `git-activity-2025-03-25-22-30.md`
+
+2. Write the analysis using the following template structure:
+   ```markdown
+   # Git Activity Summary
+
+   **Repository:** [Repository Name]
+   **Branch:** [Current Branch]
+   **Analysis Date:** [Current Date]
+
+   ### Executive Summary
+   [1-2 paragraphs summarizing key findings]
+
+   ### Recent Activity Metrics
+   - Total Commits (30 days)
+   - Active Contributors
+   - Average Commits per Day
+   - Most/Least Active Days
+
+   ### Contributor Analysis
+   #### Top Contributors (30 days)
+   | Contributor | Commits | % of Total |
+   |-------------|---------|------------|
+   | [Name 1]    | [Count] | [Percent]  |
+   | [Name 2]    | [Count] | [Percent]  |
+   | [Name 3]    | [Count] | [Percent]  |
+
+   #### Commit Activity Pattern
+   [Brief analysis of commit frequency and patterns]
+
+   ### Code Changes
+   #### Most Modified Files
+   | File Path | Change Count | Last Modified |
+   |-----------|--------------|---------------|
+   | [Path 1]  | [Count]      | [Date]        |
+   | [Path 2]  | [Count]      | [Date]        |
+   | [Path 3]  | [Count]      | [Date]        |
+
+   #### Potential Hotspots
+   [Analysis of files with frequent changes that might need refactoring]
+
+   ### Branch Analysis
+   #### Active Branches
+   | Branch Name | Last Commit | Author | Age |
+   |-------------|-------------|--------|-----|
+   | [Branch 1]  | [Date]      | [Name] | [X days] |
+   | [Branch 2]  | [Date]      | [Name] | [X days] |
+
+   #### Stale Branches
+   [List of branches with no activity for >30 days]
+
+   ### Merge Activity
+   #### Recent Merges
+   | Date | Source Branch | Target Branch | Author |
+   |------|--------------|---------------|--------|
+   | [Date] | [Branch]    | [Branch]      | [Name] |
+   | [Date] | [Branch]    | [Branch]      | [Name] |
+
+   #### Merge Frequency
+   [Analysis of merge patterns and frequency]
+
+   ### Commit Message Analysis
+   #### Common Patterns
+   [Analysis of commit message patterns and quality]
+
+   #### Action Items
+   - [Specific recommendation 1]
+   - [Specific recommendation 2]
+   - [Specific recommendation 3]
+
+   ### Recent Commits
+   [Table of 10 most recent commits with hash, date, message, and author]
+   ```
+
+3. **REQUIRED** Sections in Analysis:
+   - Executive Summary
+   - Recent Activity Metrics
+   - Contributor Analysis
+   - Code Changes
+   - Branch Analysis
+   - Merge Activity
+   - Recent Development Focus
+   - Action Items
+
+4. **VERIFICATION**: Before completing the command:
+   - Confirm output directory exists
+   - Verify file was created with correct timestamp
+   - Ensure all sections are present in the analysis
+
+## Additional Analysis Options:
+1. Code churn analysis
+```bash
+git log --author="[author]" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "Added lines: %s, Removed lines: %s, Total lines: %s\n", add, subs, loc }' -
+```
+
+2. Commit message quality:
+```bash
+git log --pretty=format:"%s" --since="1 month ago" | awk '{ if (length($0) < 10) print $0 }' | wc -l
+```
+
+3. PR analysis (for Github)
+```bash
+gh pr list --state all --limit 20 --json number,title,author,createdAt,closedAt,state
+```
+
+## Report Generation:
+1. **MANDATORY**: Save the report to `.cursor/output/git-activity-[TIMESTAMP].md`
+2. Include visualizations where possible
+3. Format tables for easy reading
+4. Provide actionable insights
+
+## Error Handling:
+1. If `.cursor/output` directory doesn't exist:
+   - Create it using `mkdir -p .cursor/output`
+   - Verify creation before proceeding
+
+2. If file creation fails:
+   - Report error to user
+   - Suggest manual directory creation
+   - Do not proceed without successful file creation
+
+<metadata>
+  priority: critical
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
+
