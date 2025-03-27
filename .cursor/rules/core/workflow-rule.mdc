@@ -1,0 +1,104 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Guidelines for Creating New Rules or Updating Existing Rules
+
+## Rule Structure
+Each rule file should follow this structure:
+
+```
+---
+description: Brief description of what the rule covers
+globs: [optional file patterns where this rule applies]
+alwaysApply: true/false (whether to apply this rule to all conversations)
+---
+
+## Rule Title
+
+## Context (Optional)
+Brief explanation of when and why this rule is useful.
+
+## Guidelines
+Specific guidelines to follow when this rule applies:
+
+1. Guideline one
+2. Guideline two
+3. ...and so on
+```
+
+## Rule Creation Process
+1. **Identify the need**: Determine what guidance would be helpful for future projects
+2. **Research best practices**: Gather information on best practices in this area
+3. **Draft guidelines**: Create specific, actionable guidelines
+4. **Test the rule**: Apply the rule to a real scenario to verify its usefulness
+5. **Refine and improve**: Update the rule based on experience using it
+
+## Rule Naming Convention
+- Use kebab-case for filenames (e.g., `some-rule.mdc`)
+- Keep names short but descriptive
+- Focus on the primary purpose of the rule
+
+## Rule Location
+1. **Always place rule files in PROJECT_ROOT/.cursor/rules/:**
+    ```
+    .cursor/rules/
+    ├── your-rule-name.mdc
+    ├── another-rule.mdc
+    └── ...
+    ```
+
+2. **Follow the naming convention:**
+    - Use kebab-case for filenames (e.g., my-rule-name.mdc)
+    - Always use the .mdc extension
+    - Make names descriptive of the rule's purpose
+
+3.  **Organize rules into subdirectories within .cursor/rules/ if needed for larger projects:**
+    ```
+    .cursor/rules/
+    ├── coding-style/
+    │   ├── python-style.mdc
+    │   └── javascript-style.mdc
+    ├── git/
+    │   └── commit-messages.mdc
+    └── ...
+    ```
+
+4. **Never place rule files:**
+    - In the project root
+    - In subdirectories outside .cursor/rules (or its subdirectories)
+    - In any other location
+
+## Rule location examples
+
+### **Bad: Rule file in wrong location**
+- rules/my-rule.mdc
+- my-rule.mdc
+- .rules/my-rule.mdc
+- .cursor/rules/my-rule/my-rule.mdc # Too deep, but .cursor/rules/my-rule.mdc is good.
+
+### **Good: Rule file in correct location**
+- .cursor/rules/my-rule.mdc
+- .cursor/rules/category/my-rule.mdc
+
+## Tips for Effective Rules
+- Always create files in `.cursor/rules/`
+- Use consistent formatting
+- Verify file content after creation
+- Make guidelines specific and actionable
+- Focus on practical advice rather than theory
+- Include examples where helpful
+- Keep guidelines concise (1-2 sentences each)
+- Ensure guidelines are mutually supportive
+- Consider both immediate and long-term implications
+
+
+<metadata>
+  priority: critical
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
