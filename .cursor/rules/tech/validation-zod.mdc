@@ -1,0 +1,85 @@
+---
+description: 
+globs: *.tsx,*.ts,*.jsx,*.js
+alwaysApply: false
+---
+# Zod Validation Standards
+
+## Schema Definition
+- Define schemas in dedicated files for reusability
+- Create meaningful schema variable names
+- Use descriptive error messages for validation failures
+- Structure complex schemas using composition
+- Export inferred types using z.infer<typeof schema>
+- Create reusable schema parts for common patterns
+
+## Validation Patterns
+- Implement proper error handling with try/catch
+- Use safeParse() for conditional validation logic
+- Chain refinements for complex validation rules
+- Use preprocess() for input transformation before validation
+- Implement custom validation with refinements
+- Create union schemas for different valid states
+
+## Form Integration
+- Use Zod with React Hook Form for form validation
+- Create resolver functions for form libraries
+- Structure form schemas to match UI organization
+- Implement field-level and form-level validation
+- Provide clear error messages for end users
+- Handle nested form data properly
+
+## API Validation
+- Validate request and response data at runtime
+- Create consistent error response structures
+- Implement proper status codes for validation errors
+- Use middleware for validation in API routes
+- Create reusable validation handlers
+- Handle partial validation for PATCH requests
+
+## Advanced Patterns
+- Use discriminated unions for complex data structures
+- Implement recursive schemas for nested structures
+- Create transformers for data normalization
+- Use effects for side effects during validation
+- Implement proper parsing for different data sources
+- Create schema factories for parameterized schemas
+
+## Error Handling
+- Create standardized error handling utilities
+- Transform Zod errors into user-friendly messages
+- Implement i18n for validation error messages
+- Log validation errors appropriately
+- Create fallback strategies for validation failures
+- Implement proper error boundaries in UI
+
+## Integration Examples
+```typescript
+    // Example 1: Basic schema with error messages
+    const userSchema = z.object({
+        email: z.string().email('Please enter a valid email'),
+        password: z.string().min(8, 'Password must be at least 8 characters')
+    });
+    type User = z.infer<typeof userSchema>;
+
+    // Example 2: Form validation with React Hook Form
+    const resolver = zodResolver(userSchema);
+
+    // Example 3: API validation
+    async function handler(req, res) {
+        const result = userSchema.safeParse(req.body);
+        if (!result.success) {
+            return res.status(400).json({ errors: result.error.format() });
+        }
+    // Continue with validated data
+}
+```
+
+<metadata>
+  priority: high
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
