@@ -33,7 +33,12 @@ The `.cursor/` folder structure contains:
 
 ## .cursor/rules/tech
 
+- [css-tailwind.mdc](.cursor/rules/tech/css-tailwind.mdc) - tailwind CSS standards and best practices
+- [nextjs.mdc](.cursor/rules/tech/nextjs.mdc) - Next.js App Router standards and best practices
 - [standards-react-development.mdc](.cursor/rules/tech/standards-react-development.mdc) - development standards when working with react code
+- [typescript.mdc](.cursor/rules/tech/typescript.mdc) - Typescript standards and best practices
+- [ui-shadcn.mdc](.cursor/rules/tech/ui-shadcn.mdc) - Shadcn standards and best practices
+- [validation-zod.mdc](.cursor/rules/tech/validation-zod.mdc) - Zod standards and best practices
 
 ## Rule-driven Workflows
 
