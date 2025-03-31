@@ -1,7 +1,7 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 # Process for implementing the smallest set of changes needed to solve the problem effectively
 
