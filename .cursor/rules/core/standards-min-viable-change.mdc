@@ -1,0 +1,61 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Process for implementing the smallest set of changes needed to solve the problem effectively
+
+## **Analysis flow when implementing solutions**
+
+1. Start with the smallest possible change
+2. Justify any modification beyond the immediate need
+3. Document alternatives considered and why they were rejected
+4. Focus on maintainability and clarity over cleverness
+
+
+## **Change summary structure**
+      
+1. **Scope of Changes**
+  - Files modified
+  - Lines changed: {lines_added} added, {lines_removed} removed
+      
+2. **Justification**
+  Explain why each change is necessary
+
+3. **Implementation**
+  Original content provided in the suggest change
+
+4. **Alternatives Considered**
+  Simpler alternatives and why they were rejected
+
+
+## **Change summary example**
+(input: This authentication system needs to be completely rewritten to use OAuth2.)
+
+1. **Scope of Changes**
+  - Files modified: 2 (auth_service.js, auth_middleware.js)
+  - Lines changed: 45 added, 32 removed
+
+2. **Justification**
+  Instead of a complete rewrite, I've identified the minimum changes needed:
+  1. Update the authentication verification logic to validate OAuth2 tokens
+  2. Add OAuth2 client configuration loading
+  3. Modify the middleware to extract tokens from Authorization header
+
+  The existing authentication flow can be maintained while adding OAuth2 support.
+
+3. **Implementation**
+  [Implementation details follow]
+
+4. **Alternatives Considered**
+  1. Complete rewrite - Rejected as high risk with significant downtime
+  2. Parallel implementation - Rejected as it would require maintaining two systems
+
+<metadata>
+  priority: critical
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
