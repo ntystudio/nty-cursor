@@ -1,0 +1,60 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Next.js 15 App Router Standards
+
+## App Router Architecture
+- Follow Next.js 15 app directory structure
+- Place pages in the `app` directory using the route segment pattern
+- Implement layouts using layout.tsx files for shared UI
+- Use page.tsx for route-specific content
+- Create route groups with (folderName) for logical organization
+- Implement parallel routes with @folderName for advanced UI patterns
+- Use loading.tsx, error.tsx, and not-found.tsx for proper loading states
+
+## Server vs Client Components
+- Prefer React Server Components (RSC) by default
+- Add 'use client' directive only when necessary for:
+  - Interactive components requiring state
+  - Components using browser-only APIs
+  - Components using React hooks
+- Optimize component boundaries to minimize client-side JavaScript
+- Implement proper data fetching in Server Components
+
+## Routing and Navigation
+- Use the Link component for client-side navigation
+- Implement proper route handlers for API endpoints
+- Use useRouter() and redirect() functions appropriately
+- Implement dynamic routes with proper parameter handling
+- Use nested layouts for complex page structures
+- Implement intercepting routes for modal patterns
+
+## Data Fetching
+- Use the fetch API with proper caching options
+- Implement Server Actions for form submissions and mutations
+- Add proper revalidation strategies (ISR, on-demand revalidation)
+- Use generateStaticParams for static generation
+- Optimize data fetching with parallel requests
+
+## Performance Optimization
+- Implement proper code splitting with dynamic imports
+- Use Image component with proper sizing and optimization
+- Implement font optimization with next/font
+- Use streaming with Suspense boundaries
+- Implement proper static/dynamic rendering decisions
+- Use proper caching strategies in fetch requests
+
+## File References
+@next.config.mjs
+@tsconfig.json
+
+<metadata>
+  priority: high
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
