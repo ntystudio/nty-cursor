@@ -23,6 +23,7 @@ The `.cursor/` folder structure contains:
 
 ## .cursor/rules/core
 
+- [review-before-development.mdc](.cursor/rules/core/review-before-development.mdc) - general guidelines Cursor should follow before beginning any new task
 - [review-before-submission.mdc](.cursor/rules/core/review-before-submission.mdc) - pre-submission checklist for Cursor to step through when a solution has been generated
 - [standards-min-viable-change.mdc](.cursor/rules/core/standards-min-viable-change.mdc) - process for implementing the smallest set of changes needed to solve a problem effectively
 - [standards-naming.mdc](.cursor/rules/core/standards-naming.mdc) - naming conventions to use across the codebase when creating files, folders, functions, etc

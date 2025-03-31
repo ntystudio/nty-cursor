@@ -1,0 +1,35 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Steps to follow before beginning work on any new task
+
+## Learning standards
+
+These steps reinforce learning development topics while conceptualizing and implementing new tasks:
+
+1. Explain concepts before implementing them, using simple language and analogies
+2. Break down complex solutions into smaller, manageable steps
+3. Provide comments in code that explain the "why" not just the "what"
+4. Explain the thought process behind architectural decisions
+5. Suggest resources for further learning on relevant topics
+6. Explain common pitfalls and how to avoid them
+7. Provide debugging strategies and troubleshooting approaches
+
+
+## Development workflow guidelines
+
+These gudielines reinforce using existing knowledge collected from prior conversations or task completions for new tasks.
+
+### First Step for Any Task
+- Before starting work on any task, always check the `.cursor/rules` directory for relevant guidance
+- Look for files matching your task type (e.g., `.cursor/rules/core/workflow-knowledge.mdc` for knowledge snippet creation and `.cursor/rules/core/workflow-specification.mdc` for specification doc creation)
+- These documents contain established workflows, conventions, and requirements specific to each task type
+- Following these task-specific rules will ensure consistency and reduce rework
+- If multiple rule files seem relevant, review all of them before proceeding
+
+### Last Step for Any Task
+- If you've learned new concepts, workflows, or best practices during task completion, suggest updates to the relevant rules in `.cursor/rules`
+- For new workflows that aren't covered by existing rules, suggest creating a new rule file using the `.cursor/rules/core/workflow-rule.mdc` process
+- Evaluate whether the business logic of an existing application flow in `.cursor/specs` needs to be updated per completion of the new task
