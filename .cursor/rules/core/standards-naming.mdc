@@ -1,0 +1,209 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Naming Standards
+
+This document outlines the naming conventions to use throughout the codebase to ensure consistency and readability.
+
+## File and Folder Structure
+
+### Folders
+- Use `kebab-case` for directory names: `auth-utils`, `user-settings`
+- Group related components in feature folders: `features/authentication`, `features/dashboard`
+- Use plural names for collection folders: `components`, `hooks`, `utils`, `types`
+
+### Files
+- React components: Use `PascalCase.tsx`: `Button.tsx`, `UserProfile.tsx`
+- Custom hooks: Use `useCamelCase.ts`: `useAuth.ts`, `useWindowSize.ts`
+- Utility files: Use `camelCase.ts`: `formatDate.ts`, `apiHelpers.ts`
+- Constants files: Use `camelCase.constants.ts`: `routes.constants.ts`
+- Type definition files: Use `camelCase.types.ts`: `user.types.ts`
+- Test files: Match the source file name with `.test.ts` or `.test.tsx`: `Button.test.tsx`
+
+### Next.js App Router Specific
+- Route components: Use `page.tsx` for route components
+- Layout components: Use `layout.tsx` for layout components
+- Loading states: Use `loading.tsx`
+- Error boundaries: Use `error.tsx`
+- Client components: Add `"use client"` directive at the top of the file
+- Route groups: Use `(groupName)` for logical route grouping
+
+## Components
+
+### Component Declaration
+- Use functional components with arrow function syntax:
+```typescript
+const ComponentName = () => {
+  return (
+    // TSX
+  );
+};
+
+export default ComponentName;
+```
+
+### Component Props
+- Create a dedicated interface for props using the component name:
+```typescript
+interface ButtonProps {
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  isDisabled?: boolean;
+  onClick?: () => void;
+}
+
+const Button = ({ variant = 'primary', size = 'md', isDisabled, onClick }: ButtonProps) => {
+  // Component logic
+};
+```
+
+### Component File Structure
+- Import statements
+- Type definitions
+- Component function
+- Helper functions (if small and component-specific)
+- Default export
+
+## TypeScript
+
+### Types and Interfaces
+- Use `PascalCase` for type and interface names: `UserProfile`, `AuthState`
+- Use interfaces for objects that will be instantiated: `interface User {}`
+- Use types for unions, intersections, or aliases: `type ButtonVariant = 'primary' | 'secondary'`
+- Prefer explicit types over `any`
+- Use descriptive type names that explain purpose: `AuthContextValue` vs `ContextValue`
+
+### Generics
+- Use single uppercase letters for simple generics: `<T>`, `<K, V>`
+- Use descriptive names for more complex generics: `<ItemType>`, `<ResponseData>`
+
+## Variables and Functions
+
+### Variables
+- Use `camelCase` for variable names: `userData`, `isLoading`
+- Use descriptive names that indicate purpose and type: `isAuthenticated` vs `auth`
+- Boolean variables should use prefixes like `is`, `has`, `should`: `isActive`, `hasPermission`
+- Use `const` by default, only use `let` when necessary
+
+### Functions
+- Use `camelCase` for function names: `fetchUserData`, `calculateTotalPrice`
+- Use verb phrases for function names that perform actions: `validateForm`, `submitData`
+- Use noun phrases for functions that return values: `userStatus`, `formattedDate`
+- Use destructuring for function parameters when possible:
+```typescript
+const updateUser = ({ id, name, email }: UserUpdateParams) => {
+  // Function logic
+};
+```
+
+### Event Handlers
+- Prefix with `handle` for component event handlers: `handleSubmit`, `handleInputChange`
+- Prefix with `on` for prop callbacks: `onClick`, `onValueChange`
+
+## Constants
+
+- Use `UPPER_SNAKE_CASE` for true constants: `MAX_RETRIES`, `API_ENDPOINTS`
+- Group related constants in objects:
+```typescript
+export const ROUTES = {
+  HOME: '/',
+  DASHBOARD: '/dashboard',
+  PROFILE: '/profile',
+  SETTINGS: '/settings',
+};
+```
+
+## CSS and Tailwind
+
+### Class Names
+- Use `kebab-case` for custom CSS class names: `user-avatar`, `nav-item`
+- Group Tailwind classes by category (layout, typography, colors, etc.)
+- Extract common patterns to Tailwind components where possible
+
+### CSS Variables
+- Use `kebab-case` for CSS variables: `--primary-color`, `--text-size-lg`
+- Use descriptive prefixes to group related variables: `--color-primary`, `--spacing-lg`
+
+### Tailwind Classes Order
+Maintain consistent ordering of Tailwind classes:
+1. Layout (position, display, z-index)
+2. Box model (width, height, margin, padding)
+3. Typography (font, text)
+4. Visual (bg, border, shadow)
+5. Misc (animations, transitions)
+
+## shadcn Components
+
+- Use shadcn's naming conventions for component variants
+- Extract component configuration to a separate configuration file when customizing shadcn components
+- Follow the recommended shadcn folder structure: `components/ui/[component-name].tsx`
+
+## State Management
+
+### React Hooks
+- Use descriptive state variable names that match their purpose:
+```typescript
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [searchQuery, setSearchQuery] = useState('');
+```
+
+### Context
+- Use `PascalCase` for context names: `UserContext`, `ThemeContext`
+- Add `Provider` suffix for provider components: `UserProvider`, `ThemeProvider`
+- Add `Context` suffix for the actual context: `UserContext`, `ThemeContext`
+
+## API Integration
+
+### API Functions
+- Use descriptive function names that indicate the operation: `fetchUsers`, `createPost`, `updateProfile`
+- Group API calls by resource or feature in separate files: `userApi.ts`, `authApi.ts`
+
+### Data Fetching
+- Use consistent patterns for data fetching (React Query, SWR, or custom hooks)
+- Use descriptive query key names in React Query: `['users', userId]`, `['products', filters]`
+
+## Imports and Exports
+
+- Use named exports for utilities and components that may be used alongside others
+- Use default exports for main components of a file
+- Group imports by:
+  1. External packages
+  2. Internal modules (absolute imports)
+  3. Local modules (relative imports)
+  4. Type imports
+  5. Asset imports
+
+## Comments
+
+- Use JSDoc comments for exported functions and components:
+```typescript
+/**
+ * Button component with multiple variants and sizes
+ * @param {ButtonProps} props - The component props
+ * @returns {JSX.Element} - The Button component
+ */
+```
+- Use inline comments for complex logic that isn't immediately obvious
+- Avoid comments that simply restate the code
+
+## Commit Messages
+
+- Use the imperative mood: "Add feature" not "Added feature"
+- Keep the first line under 50 characters
+- Structure commit messages as:
+  - feat: Add user authentication
+  - fix: Resolve layout issue on mobile devices
+  - docs: Update README with setup instructions
+  - refactor: Simplify data fetching logic
+  - test: Add unit tests for auth hooks
+
+<metadata>
+  priority: critical
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
