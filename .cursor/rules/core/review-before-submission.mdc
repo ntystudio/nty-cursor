@@ -1,0 +1,132 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Critically evaluate solutions for bugs, edge cases, and maintenance issues
+Once a solution has been generated, perform the pre-submission checklist to ensure you have properly evaluated your solution for bugs, edge cases, and maintenance issues.
+      
+## 1. **Pre-Submission Checklist**
+
+| Category | Status | Notes |
+|----------|--------|-------|
+| **Functionality** | {status} | {notes} |
+| **Edge Cases** | {status} | {notes} |
+| **Error Handling** | {status} | {notes} |
+| **Security** | {status} | {notes} |
+| **Performance** | {status} | {notes} |
+| **Maintainability** | {status} | {notes} |
+| **Testing** | {status} | {notes} |
+
+## 2. **Critical Review**
+{critical_review_notes}
+
+## 3. **Improvements for Future Iterations**
+{future_improvements}
+
+
+## 4. **Before submitting your solution:**
+a. Review functionality for correctness and completeness
+b. Test with edge cases and unexpected inputs
+c. Verify error handling for all failure paths
+d. Check for security vulnerabilities
+e. Look for performance bottlenecks
+f. Assess code maintainability
+
+
+# Self-review example with output sample
+
+## Input
+I've implemented the user search functionality. Here's the solution:
+
+```javascript
+function searchUsers(query) {
+  const users = database.getUsers();
+  return users.filter(user => 
+    user.name.includes(query) || 
+    user.email.includes(query)
+  );
+}
+```
+
+## Output
+
+### 1. **Self-Reviewed Solution**
+
+```javascript
+/**
+  * Search for users by name or email
+  * @param {string} query - The search term to look for
+  * @returns {Array} - Array of matching user objects
+  */
+function searchUsers(query) {
+  // Validate input
+  if (!query || typeof query !== 'string') {
+    return [];
+  }
+  
+  try {
+    // Normalize query for case-insensitive search
+    const normalizedQuery = query.toLowerCase().trim();
+    
+    // Return empty array for very short queries
+    if (normalizedQuery.length < 2) {
+      return [];
+    }
+    
+    // Get users with timeout and limit
+    const users = database.getUsers({ timeout: 3000, limit: 1000 });
+    
+    // Perform case-insensitive search on indexed fields
+    return users.filter(user => {
+      // Safely handle potentially missing properties
+      const name = (user.name || '').toLowerCase();
+      const email = (user.email || '').toLowerCase();
+      
+      return name.includes(normalizedQuery) || 
+            email.includes(normalizedQuery);
+    }).slice(0, MAX_SEARCH_RESULTS); // Limit results for performance
+  } catch (error) {
+    logger.error('User search error:', error);
+    return []; // Return empty array on error rather than breaking UI
+  }
+}
+```
+      
+### 2. **Pre-Submission Checklist**
+
+| Category | Status | Notes |
+|----------|--------|-------|
+| **Functionality** | ✅ Complete | Search works on both name and email |
+| **Edge Cases** | ✅ Complete | Handles null/empty queries, missing fields |
+| **Error Handling** | ✅ Complete | Catches database exceptions, returns empty array |
+| **Security** | ✅ Complete | Input validation, no injection vectors |
+| **Performance** | ⚠️ Concerns | Full table scan, needs pagination for large DBs |
+| **Maintainability** | ✅ Complete | Well-commented, clear variable names |
+| **Testing** | ⚠️ Missing | Unit tests needed for edge cases |
+
+
+### 3. **Critical Review**
+
+- **Performance issue**: The current implementation loads all users into memory before filtering. This will cause problems with large user databases.
+- **Incomplete validation**: We're handling basic input issues, but not validating the structure of returned user objects.
+- **Missing features**: No highlighting of matched terms or sorting of results by relevance.
+- **Limited search fields**: Only searching name and email, but users might want to search by other fields.
+
+### 4. Improvements for Future Iterations
+- Replace in-memory filtering with database query using indexes
+- Add server-side pagination with limit/offset
+- Implement relevance scoring and sorting
+- Add match highlighting in results
+- Expand searchable fields (username, department, etc.)
+- Add comprehensive unit tests for all edge cases
+
+
+<metadata>
+  priority: critical
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
