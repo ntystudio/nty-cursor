@@ -1,0 +1,69 @@
+---
+description: 
+globs: *.tsx,*.jsx,*.css
+alwaysApply: false
+---
+# Tailwind CSS standards and best practices
+
+## Core Principles
+- Use utility classes instead of custom CSS when possible
+- Follow the project's @tailwind.config.js configuration
+- Maintain consistent spacing and sizing throughout the project
+- Implement mobile-first responsive design
+- Use CSS variables for theme values
+- Maintain accessibility standards with proper contrast and sizing
+
+## Class Organization
+- Group Tailwind classes in a logical order:
+  1. Layout (display, position, etc.)
+  2. Sizing (width, height)
+  3. Spacing (margin, padding)
+  4. Typography (font, text)
+  5. Visual (colors, backgrounds)
+  6. Interactive (hover, focus)
+- Use the `cn()` utility for conditional classes
+- Extract repeated class patterns into reusable components
+
+## Responsive Design
+- Start with mobile designs and add complexity at larger breakpoints
+- Use standard breakpoints (sm, md, lg, xl, 2xl) consistently
+- Avoid design jumps between breakpoints
+- Test thoroughly across various device sizes
+- Implement responsive typography using appropriate scales
+- Use container queries for component-specific responsiveness
+
+## Theme Customization
+- Define custom colors in the @tailwind.config.js
+- Create semantic color variables (primary, secondary, etc.)
+- Extend the theme rather than overriding defaults
+- Define consistent font sizes and spacing scales
+- Create custom plugins for project-specific utilities
+- Use presets for shared configurations across projects
+
+## Dark Mode
+- Implement class-based dark mode strategy
+- Use dark: variants for dark mode specific styling
+- Ensure proper contrast in both light and dark modes
+- Test color combinations for accessibility
+- Use CSS variables for theme switching
+- Implement user preference detection
+
+## Performance
+- Use PurgeCSS in production to remove unused utilities
+- Avoid excessive arbitrary values
+- Minimize usage of @apply in CSS files
+- Create component abstractions for repeated patterns
+- Use proper caching strategies for CSS files
+
+## File References
+@tailwind.config.js
+@globals.css
+
+<metadata>
+  priority: high
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
