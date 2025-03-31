@@ -1,0 +1,124 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Development standards
+
+## Development Philosophy
+- Write clean, maintainable, and scalable code
+- Follow SOLID principles
+- Prefer functional and declarative programming patterns over imperative
+- Emphasize type safety and static analysis
+- Practice component-driven development
+
+## Code Standards
+- Use descriptive variable names that reflect purpose
+- Document complex code sections and public interfaces
+- Avoid code duplication; extract reusable patterns
+- Handle errors properly with appropriate error messages
+- Follow consistent formatting throughout the codebase
+
+## Project Organization
+- Follow clear separation of concerns
+- Place related code in properly named modules
+- Prefer small, focused files over large monolithic ones
+- Maintain consistency in file naming and structure
+- Store configuration in appropriate environment files
+
+
+## Root Directory Structure
+
+```
+├── app/                 # Next.js app router pages
+│   ├── (app)/           # Main application routes
+│   ├── (auth)/          # Authentication routes
+│   ├── (marketing)/     # Marketing pages
+│   ├── (settings)/      # Settings pages
+│   └── layout.tsx       # Root layout
+├── components/          # React components
+│   ├── ui/              # shadcn/ui components
+│   ├── auth/            # Authentication components
+│   ├── forms/           # Form components
+│   ├── layout/          # Layout components
+│   ├── marketing/       # Marketing components
+│   └── ...              # Feature-specific components
+├── lib/                 # Core utilities and shared code
+│   ├── actions/         # Server actions
+│   ├── api/             # API client code
+│   ├── auth/            # Authentication utilities
+│   ├── hooks/           # Custom React hooks
+│   ├── providers/       # React providers
+│   ├── schemas/         # Zod validation schemas
+│   ├── store/           # State management
+│   ├── types/           # TypeScript types
+│   └── utils.ts         # Utility functions
+├── public/              # Static assets
+├── config/              # Configuration files
+├── data/                # Static data files
+```
+
+## Directory Standards
+
+### App Directory (`/app`)
+- Follow Next.js 15 App Router conventions
+- Use route groups (folders in parentheses) for logical organization
+- Implement proper loading, error, and not-found states
+- Keep page components focused on layout and composition
+- Use server components by default, client components when necessary
+
+### Components Directory (`/components`)
+- Organize components by feature/domain
+- Keep UI components in the `ui` directory
+- Maintain consistent component file naming (kebab-case)
+- Include index files for cleaner imports
+- Group related components in feature-specific directories
+
+### Library Directory (`/lib`)
+- Keep utility functions focused and pure
+- Maintain clear separation of concerns
+- Use TypeScript for type safety
+- Document public APIs and interfaces
+- Follow consistent file naming conventions
+
+### Public Directory (`/public`)
+- Store static assets (images, fonts, etc.)
+- Maintain organized subdirectories by asset type
+- Use appropriate file formats and optimization
+- Keep file names lowercase and URL-friendly
+
+## File Naming Conventions
+
+- React Components: PascalCase (e.g., `UserProfile.tsx`)
+- Utilities and Hooks: camelCase (e.g., `useAuth.ts`)
+- Types and Interfaces: PascalCase (e.g., `UserTypes.ts`)
+- Constants: UPPER_SNAKE_CASE (e.g., `API_ENDPOINTS.ts`)
+- Test Files: `*.test.ts` or `*.spec.ts`
+- Style Files: `*.styles.ts` or `*.css`
+
+## Import Standards
+
+- Use absolute imports from the root
+- Group imports in the following order:
+  1. React and Next.js imports
+  2. External library imports
+  3. Internal component imports
+  4. Utility and type imports
+- Use named exports for better tree-shaking
+- Avoid circular dependencies
+
+## Component Organization
+
+- One component per file
+- Include related types and utilities in the same directory
+- Use index files for public exports
+- Keep component files focused and maintainable
+- Document props and complex logic
+
+## State Management
+
+- Use React Context for global state when appropriate
+- Implement proper state management patterns
+- Keep state as local as possible
+- Document state management decisions
+- Follow immutable state patterns 
