@@ -122,3 +122,12 @@ alwaysApply: true
 - Keep state as local as possible
 - Document state management decisions
 - Follow immutable state patterns 
+
+<metadata>
+  priority: critical
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
