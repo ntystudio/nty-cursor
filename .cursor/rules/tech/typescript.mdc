@@ -1,0 +1,61 @@
+---
+description: 
+globs: *.tsx,*.ts
+alwaysApply: false
+---
+# TypeScript standards and best practices
+
+## TypeScript Fundamentals
+- Use TypeScript for all new code
+- Enable strict mode in tsconfig.json
+- Prefer interfaces over types for object definitions
+- Use explicit typing rather than relying on inference
+- Avoid `any` type; use `unknown` when type is uncertain
+- Properly define function parameter and return types
+
+## Advanced TypeScript
+- Use generics for reusable, type-safe code
+- Leverage union and intersection types appropriately
+- Use discriminated unions for complex type relationships
+- Create utility types for common type transformations
+- Use readonly modifier for immutable properties
+- Implement proper error handling with custom error types
+
+## TypeScript with React
+- Define props interfaces for React components
+- Use React.FC type sparingly; prefer explicit return types
+- Properly type event handlers and callback functions
+- Handlers (onClick, onSubmit, etc) should be named handle{action} and explicitly defined `const handle{action} = (e) => { ... }`
+- Use TypeScript to enforce prop constraints
+- Create custom hooks with appropriate TypeScript definitions
+- Properly type context providers and consumers
+
+## Type Safety
+- Avoid type assertions unless absolutely necessary
+- Use null checks and guards to handle optional values
+- Create type guards for runtime type checking
+- Implement exhaustive checks with never type
+- Add index signatures only when appropriate
+
+## Type vs Interface Guidelines
+- Use type aliases for:
+  - Object shapes and props
+  - Union and intersection types
+  - Primitive type aliases
+  - Function types
+  - Mapped types
+  - Conditional types
+- Use interfaces only when:
+  - Declaration merging is needed
+  - Working with class implementations
+  - Extending existing interfaces from libraries
+  - Creating object-oriented hierarchies 
+
+<metadata>
+  priority: high
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
