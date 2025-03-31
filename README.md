@@ -14,6 +14,25 @@ The `.cursor/` folder structure contains:
 ├── specs/          # specification files generated from chat
 ```
 
+---
+
+## .cursor/rules/commands
+
+- [build-review.mdc](.cursor/rules/commands/build-review.mdc) - runs the npm build process, resolves any errors, and generates a report on build health
+- [git-summarize.mdc](.cursor/rules/commands/git-summarize.mdc) - generates a summary of recent git activity (1 month) and respository health
+
+## .cursor/rules/core
+
+- [review-before-submission.mdc](.cursor/rules/core/review-before-submission.mdc) - pre-submission checklist for Cursor to step through when a solution has been generated
+- [standards-min-viable-change.mdc](.cursor/rules/core/standards-min-viable-change.mdc) - process for implementing the smallest set of changes needed to solve a problem effectively
+- [standards-naming.mdc](.cursor/rules/core/standards-naming.mdc) - naming conventions to use across the codebase when creating files, folders, functions, etc
+- [workflow-knowledge.mdc](.cursor/rules/core/workflow-knowledge.mdc) - process for generating a new knowledge document
+- [workflow-rule.mdc](.cursor/rules/core/workflow-rule.mdc) - process for generating a new Cursor rule
+- [workflow-specification.mdc](.cursor/rules/core/workflow-specification.mdc) - process for generating a new specification document
+
+## .cursor/rules/tech
+
+- [standards-react-development.mdc](.cursor/rules/tech/standards-react-development.mdc) - development standards when working with react code
 
 ## Rule-driven Workflows
 
