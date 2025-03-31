@@ -1,0 +1,66 @@
+---
+description: 
+globs: *.tsx,*.ts,*.jsx,*.js
+alwaysApply: false
+---
+# shadcn UI imlementation standards and best practices
+
+## Component Usage
+- Use shadcn components from `components/ui`
+- Follow shadcn naming conventions and folder structure
+- Use the `cn` utility function for conditional class names
+- Compose components following shadcn patterns
+- Extend components using composition rather than modification
+- Maintain accessibility features built into the components
+
+## Component Customization
+- Use the theming system for color customization
+- Modify component variants through proper configuration
+- Create consistent custom variants for project-specific needs
+- Use the shadcn CLI for adding and maintaining components
+- Avoid direct modification of shadcn source files
+- Implement proper component props for flexibility
+
+## Styling Approach
+- Use Tailwind CSS for styling all components
+- Follow the shadcn theme in @tailwind.config.js
+- Use CSS variables for theme colors
+- Implement dark mode support with proper class-based strategy
+- Follow responsive design using Tailwind breakpoints
+- Maintain consistent spacing using Tailwind's spacing scale
+
+## Form Components
+- Use shadcn form components with React Hook Form
+- Implement proper form validation patterns
+- Create reusable form layouts and structures
+- Properly handle form states (loading, error, success)
+- Implement accessible error messages
+- Use proper label and description patterns
+
+## Dialog and Modal Patterns
+- Use shadcn Dialog component for modal interfaces
+- Implement proper focus management
+- Create consistent dialog patterns across the application
+- Handle dialog state properly with React hooks
+- Ensure dialogs are properly accessible
+- `DialogContent` requires a `DialogTitle` for the component to be accessible for screen reader users
+
+## Data Display
+- Use shadcn Table components for data tables
+- Implement proper pagination, sorting, and filtering
+- Create consistent data card patterns
+- Use shadcn sheet for mobile drawers and panels
+- Implement skeleton loaders for loading states
+
+## File References
+@tailwind.config.js
+@button.tsx
+
+<metadata>
+  priority: high
+  version: 1.0
+  changelog:
+    - version: 1.0
+      changes:
+        - Initial version
+</metadata>
